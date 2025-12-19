@@ -17,3 +17,14 @@ exports.initSeats = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+// Get seats for a show
+exports.getSeats = async (req, res) => {
+  try {
+    const { showId } = req.params;
+    const seats = await Seat.find({ showId });
+    res.json(seats);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+

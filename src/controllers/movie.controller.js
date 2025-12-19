@@ -20,3 +20,12 @@ exports.getMovies = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+exports.getAllMovies = async (req, res) => {
+  try {
+    const movies = await Movie.find({});
+    res.json(movies);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+

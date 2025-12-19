@@ -6,8 +6,18 @@ const showSchema = new mongoose.Schema({
     ref: 'Movie',
     required: true
   },
-  theater: { type: String, required: true },
-  time: { type: String, required: true }
+  theater: {
+    type: String,
+    required: true
+  },
+  time: {
+    type: String,
+    required: true
+  },
+  totalSeats: {
+    type: Number,
+    required: true
+  }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Show', showSchema);
