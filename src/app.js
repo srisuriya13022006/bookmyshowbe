@@ -1,12 +1,29 @@
 const express = require('express');
-const cors = require('cors');
+//const cors = require('cors');
 
 const app = express();
 
 // 🔥 ENABLE CORS
+const cors = require('cors');
+
+const allowedOrigins = [
+  'http://localhost:5173',                 // local dev
+  'https://bookmyshow-gray-nine.vercel.app' // vercel prod
+];
+
 app.use(cors({
-  origin: 'http://localhost:5173'
+  origin: function (origin, callback) {
+    // allow requests from Postman / curl
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error('Not allowed by CORS'));
+  }
 }));
+
 
 app.use(express.json());
 
